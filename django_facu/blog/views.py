@@ -50,12 +50,7 @@ class PostDetailListView(ListView):
     paginate_by = 3
 
     def get_queryset(self):
-        print("aloh",self.kwargs.get('pk'))
         post = get_object_or_404(Post, pk=self.kwargs.get('pk'))
-        print("adioh", post)
-        x=PostDetail.objects.all()
-        for i in x:
-            print(i.post.title)
         return PostDetail.objects.filter(post=post)
 
 #Dashboards de un proyecto
@@ -169,3 +164,15 @@ class PresentationDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView
 
 def about(request):
     return render(request, 'blog/about.html', {'title': 'About'})
+
+class OtucView(ListView):
+    model = PostDetail
+    template_name = "blog/post_detail.html"  # <app>/<model>_<viewtype>.html
+    context_object_name = 'post'
+    # Ordenados de más reciente a menos reciente
+    ordering = ['-date_posted']
+    paginate_by = 3
+
+    def get_queryset(self):
+        post = get_object_or_404(Post, title="OTUC")
+        return PostDetail.objects.filter(post=post)

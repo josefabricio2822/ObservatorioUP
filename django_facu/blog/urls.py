@@ -13,7 +13,8 @@ from .views import PostListView, \
     PostDeleteView, \
     PresentationUpdateView, \
     PresentationDeleteView, \
-    PresentationListView
+    PresentationListView, \
+    OtucView
 
 urlpatterns = [
     path('', PostListView.as_view(), name='blog-home'),
@@ -30,4 +31,5 @@ urlpatterns = [
     path('presentation/<int:pk>/delete/', PresentationDeleteView.as_view(), name='presentation-delete'),
     path('post/new/', PostCreateView.as_view(), name='post-create'),
     path('about/', about, name='blog-about'),
+    path('otuc/', OtucView.as_view()),
 ]
